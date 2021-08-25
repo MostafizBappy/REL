@@ -1,0 +1,1051 @@
+﻿@model BLL.DMS.ViewModel.SalesViewModel
+@using BLL.DMS.Helpers
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .radio-inline {
+        font-weight: normal;
+    }
+
+    #formLabel {
+        background-color: #719ddb;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+@using (Html.BeginForm("Index", "Sales", FormMethod.Post, new { id = "frm", @encType = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12" id="formLabel">
+            <h4>Sales Entry</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.InvoiceNO, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.InvoiceNO, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+                    @Html.ValidationMessageFor(model => model.InvoiceNO)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.TDate, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.ValidationMessageFor(model => model.TDate)
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerModel.Mobile, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CustomerModel.Mobile, new { htmlAttributes = new { @class = "form-control", style = "width:80%;display: inline-block" } })
+                        <a href="javascript:void(0)" class="" title="search" onclick="GetCustomerInfo()">
+                            <img src='@Url.Content("~/Content/img/search-icon.png")' alt="search customer" style="border: none; " width="40" height="30" />
+                        </a>
+                        @Html.ValidationMessageFor(model => model.CustomerModel.Mobile, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerModel.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.CustomerModel.City, new SelectList(Model.CustomerModel.CityList), "-- Select City --", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CustomerModel.City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerModel.CustName, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CustomerModel.CustName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CustomerModel.CustName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerModel.DOBT, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CustomerModel.DOBT, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                        @Html.ValidationMessageFor(model => model.CustomerModel.DOBT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerModel.Address, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CustomerModel.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CustomerModel.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                @Html.LabelFor(model => model.CustomerModel.CustSex, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="form-inline">
+                    @for (int i = 0; i < Model.CustomerModel.SexList.Count(); i++)
+                    {
+                        <div class="form-check col-md-2">
+                            <input type="radio" class="radio-inline" value="@Model.CustomerModel.SexList[i]" name="CustSex" />&nbsp;
+                            <label class="radio-inline">@Model.CustomerModel.SexList[i]</label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                @Html.LabelFor(model => model.CustomerModel.Profession, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="form-inline">
+                    @for (int i = 0; i < Model.CustomerModel.ProfessionList.Count(); i++)
+                    {
+                        <div class="form-check col-md-2">
+                            <input type="radio" class="radio-inline" value="@Model.CustomerModel.ProfessionList[i]" name="Profession" />&nbsp;
+                            <label class="radio-inline">@Model.CustomerModel.ProfessionList[i]</label>
+                        </div>
+
+                    }
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerModel.Org, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CustomerModel.Org, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CustomerModel.Org, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerModel.Email, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CustomerModel.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CustomerModel.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerModel.Desg, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CustomerModel.Desg, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CustomerModel.Desg, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12" id="formLabel">
+            Product Information
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.ProductCode, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.ProductCode, new { htmlAttributes = new { @class = "form-control", style = "width:80%;display: inline-block" } })
+                    <a href="javascript:void(0)" id="searchBtn" class="" title="search" onclick="GetProductInfoByCode()">
+                        <img src='@Url.Content("~/Content/img/search-icon.png")' alt="search customer" style="border: none; " width="40" height="30" />
+                    </a>
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.ProductCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.HiddenFor(model => model.SalesDetailModel.ProductModel)
+                @Html.LabelFor(model => model.SalesDetailModel.ProductID, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.SalesDetailModel.ProductID, new SelectList(Model.ModelList, "ProductId", "modelName"), new { @class = "form-control", @name = "modelName", @id = "searchableProduct_ddl" })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.ProductID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.ProductDescription, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.ProductDescription, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.ProductDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.UnitPrice, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.UnitPrice, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.UnitPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.CampaignPrice, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.CampaignPrice, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.CampaignPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.Qty, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.Qty, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.TotalAmnt, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.TotalAmnt, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.TotalAmnt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.DisCode, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.DisCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.DisCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.DiscountAmnt, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.DiscountAmnt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.DiscountAmnt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.DisRef, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.DisRef, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.DisRef, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.WithAdjAmnt, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.WithAdjAmnt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.WithAdjAmnt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.SLNO, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.SLNO, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.SLNO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.NetAmnt, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.NetAmnt, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.NetAmnt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SalesDetailModel.ProdRemarks, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SalesDetailModel.ProdRemarks, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalesDetailModel.ProdRemarks, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input id="btnAddProduct" type="button" class="btn btn-info btn-sm" value="Add Product In List" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="row" style="margin-top:10px">
+        <div class="col-md-12">
+            <table id="grid" class="table table-responsive table-bordered" style="width:100%;margin:0 auto">
+                <thead style="width:100%">
+                    <tr>
+                        <th>
+                            Product ID
+                        </th>
+                        <th>
+                            Model
+                        </th>
+                        <th>
+                            MRP (Tk.)
+                        </th>
+                        <th>
+                            Camp. Price
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Total Price
+                        </th>
+                        <th>
+                            Dis Amount
+                        </th>
+                        <th>
+                            Dis Code
+                        </th>
+                        <th>
+                            Dis Ref
+                        </th>
+                        <th>
+                            With/Adj Amnt
+                        </th>
+                        <th>
+                            Net Amount
+                        </th>
+                        <th>
+                            Product SL
+                        </th>
+                        <th>
+                            Remarks
+                        </th>
+                        <th>
+                            Remove
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ if (Model.SalesDetailList.Count() > 0)
+                        {
+                            { Html.RenderPartial("_Detail", Model); }
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td style="text-align: right; border: none" colspan="4">Total &nbsp; &nbsp;:</td>
+                        <td style="text-align: right; border:none" id="tdTotalQty"></td>
+                        <td style="text-align: right; border:none" id="tdTotalPrice"></td>
+                        <td style="text-align: right; border:none" id="tdTotalDiscount"></td>
+                        <td style="text-align: right; border: none" colspan="2">&nbsp; &nbsp;</td>
+                        <td style="text-align: right; border:none" id="tdTotalWithAdjAmount"></td>
+                        <td style="text-align: right; border:none" id="tdTotalNetAmount">
+                            @Html.HiddenFor(model => model.NetSalesAmnt)
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12" id="formLabel">
+            Payment Information
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PayAmnt, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PayAmnt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PayAmnt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.DueAmnt, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DueAmnt, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+                    @Html.ValidationMessageFor(model => model.DueAmnt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardAmnt1, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CardAmnt1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CardAmnt1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardAmnt2, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CardAmnt2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CardAmnt2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardNo1, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CardNo1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CardNo1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardNo2, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CardNo2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CardNo2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardType1, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CardType1, new SelectList(Model.CardTypeList), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CardType1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardType2, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CardType2, new SelectList(Model.CardTypeList), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CardType2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bank1, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Bank1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Bank1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bank2, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Bank2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Bank2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SecurityCode, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SecurityCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SecurityCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SecurityCode2, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SecurityCode2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SecurityCode2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.AppovalCode1, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AppovalCode1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AppovalCode1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.AppovalCode2, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AppovalCode2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AppovalCode2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Authorby, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Authorby, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Authorby, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Issby, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Issby, new { htmlAttributes = new { @class = "form-control", style = "width:80%;display: inline-block" } })
+                    <a href="javascript:void(0)" class="" title="search" onclick="GetSellerInfo()">
+                        <img src='@Url.Content("~/Content/img/search-icon.png")' alt="search seller" style="border: none; " width="40" height="30" />
+                    </a>
+                    @Html.ValidationMessageFor(model => model.Issby, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeliveryFrom, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.DeliveryFrom, new SelectList(Model.EntityList, "EID", "eName"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DeliveryFrom, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <div class="col-md-10">
+                    <label id="lblSellerInfo"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.POCode, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.POCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.POCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.RefCHNo, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RefCHNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RefCHNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SourceOfInfo, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.SourceOfInfo, new SelectList(Model.SourceOfInfoList), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SourceOfInfo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            @Html.LabelFor(model => model.TermsCondition, htmlAttributes: new { @class = "control-label col-md-6 col-sm-12" })
+            <div class="form-group">
+                @for (int i = 0; i < Model.TermsConditionList.Count(); i++)
+                {
+                    <div class="form-check col-md-12">
+                        <input type="checkbox" class="radio-inline" value="@Model.TermsConditionList[i].TermsCondition" name="TermsCondition" />&nbsp;
+                        <label class="checkbox">@Model.TermsConditionList[i].TermsCondition</label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row" style="text-align:center">
+        <div class="col-12">
+            <input type="submit" class="btn btn-success" value="Save Information" id="btnSave" name="btnSave" style="" />
+        </div>
+    </div>
+}
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#searchableProduct_ddl").chosen();
+        });
+        //$('#searchBtn').click(function (e) {
+        //    e.preventDefault();
+        //});
+
+        $("#searchableProduct_ddl").change(function () {
+            var prodId = $(this).val();
+            GetProductInfo(prodId);
+        });
+
+        function GetCustomerInfo() {
+            var mobileNo = $('#CustomerModel_Mobile').val();
+            var url = '@Url.Action("GetCustomerInfo", "Sales")';
+            if (mobileNo == null || mobileNo == '') {
+                return false;
+            }
+            else {
+                var data = {
+                    mobileNo: mobileNo
+                };
+                $.ajax({
+                    url: url,
+                    data: data,
+                    type: 'POST',
+                    cache: false,
+                    success: function (obj) {
+                        if (obj.Result == true) {
+                            alert(obj.Result);
+                        }
+                        else if (obj.Result == false) {
+                            alert('System is unable to load data please try again.');
+                            $('#CustomerModel_CustName').val('');
+                            $("#CustomerModel_Address").val('');
+                            $("#CustomerModel_Email").val('');
+                        }
+                        else {
+                            $('#CustomerModel_CustName').val(obj.CustomerName);
+                            $("#CustomerModel_Address").val(obj.CustomerAddress);
+                            $("#CustomerModel_Email").val(obj.CustomerEmail);
+                        }
+                    }
+                });
+            }
+        }
+
+        function GetProductInfo(prodId) {
+            var url = '@Url.Action("GetProductInfo", "Sales")';
+            var productId = parseInt(prodId);
+            if (productId > 0) {
+                var data = {
+                    productId: productId
+                };
+                $.ajax({
+                    url: url,
+                    data: data,
+                    type: 'POST',
+                    cache: false,
+                    success: function (obj) {
+                        if (obj.Result == true) {
+                            alert(obj.Result);
+                        }
+                        else if (obj.Result == false) {
+                            alert('System is unable to load data please try again.');
+                        }
+                        else {
+                            $('#SalesDetailModel_ProductDescription').val(obj.ProdDesc);
+                            $("#SalesDetailModel_UnitPrice").val(obj.UnitPrice);
+                            $("#SalesDetailModel_CampaignPrice").val(obj.CampaignPrice);
+                            $("#SalesDetailModel_ProductModel").val(obj.ProdModel);
+                        }
+                    }
+                });
+            }
+
+            return false;
+        }
+        function GetProductInfoByCode() {
+            var url = '@Url.Action("GetProductInfoByCode", "Sales")';
+            var prodCode = $("#SalesDetailModel_ProductCode").val();
+            if (prodCode == null || prodCode == '') {
+                return false;
+            }
+            else {
+                    var data = {
+                        prodCode: prodCode
+                    };
+                    $.ajax({
+                        url: url,
+                        data: data,
+                        type: 'POST',
+                        cache: false,
+                        success: function (obj) {
+                            if (obj.Result == true) {
+                                alert(obj.Result);
+                            }
+                            else if (obj.Result == false) {
+                                alert('System is unable to load data please try again.');
+                            }
+                            else {
+                                $('#SalesDetailModel_ProductDescription').val(obj.ProdDesc);
+                                $("#SalesDetailModel_UnitPrice").val(obj.UnitPrice);
+                                $("#SalesDetailModel_CampaignPrice").val(obj.CampaignPrice);
+                                $("#SalesDetailModel_ProductModel").val(obj.ProdModel);
+                                //$("#SalesDetailModel_ProductID").val(obj.ProductID);
+                                $("#searchableProduct_ddl").val(obj.ProductId).trigger('chosen:updated');
+                            }
+                        }
+                    });
+            }
+        }
+    //--------------------product detail ----------------------------//
+
+       $("#btnAddProduct").click(function () {
+
+         var productID = $("#searchableProduct_ddl").val();
+           if (productID == null || productID == '' || productID == '0') {
+               $(".chosen-single").css("border", "1px solid red");
+            return false;
+           }
+           if ($('#SalesDetailModel_ProductModel').val() == null || $('#SalesDetailModel_ProductModel').val() == '' || $('#SalesDetailModel_ProductModel').val() == '0') {
+               $("#SalesDetailModel_ProductModel").addClass("border-danger");
+               return false;
+
+           }
+           if ($('#SalesDetailModel_CampaignPrice').val() == null || $('#SalesDetailModel_CampaignPrice').val() == '' || $('#SalesDetailModel_CampaignPrice').val() == '0') {
+               $("#SalesDetailModel_CampaignPrice").addClass("border-danger");
+                return false;
+        }
+           if ($('#SalesDetailModel_NetAmnt').val() == null || $('#SalesDetailModel_NetAmnt').val() == '' || $('#SalesDetailModel_NetAmnt').val() == 0) {
+               $("#SalesDetailModel_NetAmnt").addClass("border-danger");
+            return false;
+
+        }
+
+        //var productID = $('#SalesDetailModel_ProductID').val();
+           var productModel = $('#SalesDetailModel_ProductModel').val();
+           var unitPrice = $('#SalesDetailModel_UnitPrice').val();
+           var campaignPrice = $('#SalesDetailModel_CampaignPrice').val();
+           var qty = $('#SalesDetailModel_Qty').val();
+           var totalAmnt = $('#SalesDetailModel_TotalAmnt').val();
+           var discountAmnt = $('#SalesDetailModel_DiscountAmnt').val();
+           if (discountAmnt == '' || discountAmnt == null) {
+               discountAmnt = 0;
+           }
+           var disCode = $('#SalesDetailModel_DisCode').val();
+           var disRef = $('#SalesDetailModel_DisRef').val();
+           var withAdjAmnt = $('#SalesDetailModel_WithAdjAmnt').val();
+           if (withAdjAmnt == '' || withAdjAmnt == null) {
+               withAdjAmnt = 0;
+           }
+           var netAmnt = $('#SalesDetailModel_NetAmnt').val();
+           var sLNO = $('#SalesDetailModel_SLNO').val();
+           var prodRemarks = $('#SalesDetailModel_ProdRemarks').val();
+
+        var url = '@Url.Action("AddProductDetail", "Sales")';
+        var data = {
+            ProductID: productID,
+            ProductModel: productModel,
+            UnitPrice: unitPrice,
+            CampaignPrice: campaignPrice,
+            Qty: qty,
+            TotalAmnt: totalAmnt,
+            DiscountAmnt: discountAmnt,
+            DisCode: disCode,
+            DisRef: disRef,
+            WithAdjAmnt: withAdjAmnt,
+            NetAmnt: netAmnt,
+            SLNO: sLNO,
+            ProdRemarks: prodRemarks
+        };
+
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            cache: false,
+            success: function (html) {
+                if ($(html).val() != 'Invalid') {
+
+                    $('#grid tbody').append(html);
+                    calculateTotal();
+
+                    $('#SalesDetailModel_ProductID').val('');
+                    //$('#searchableProduct_ddl option:selected').text("--Select--");
+                    $("#searchableProduct_ddl").val('0').trigger('chosen:updated');
+                    $('#SalesDetailModel_ProductModel').val('');
+                    $('#SalesDetailModel_ProductDescription').val('');
+                    $('#SalesDetailModel_UnitPrice').val('');
+                    $('#SalesDetailModel_CampaignPrice').val('');
+                    $('#SalesDetailModel_Qty').val('');
+                    $('#SalesDetailModel_TotalAmnt').val('');
+                    $('#SalesDetailModel_DiscountAmnt').val('');
+                    $('#SalesDetailModel_DisCode').val('');
+                    $('#SalesDetailModel_DisRef').val('');
+                    $('#SalesDetailModel_WithAdjAmnt').val('');
+                    $('#SalesDetailModel_NetAmnt').val('');
+                    $('#SalesDetailModel_SLNO').val('');
+                    $('#SalesDetailModel_ProdRemarks').val('');
+
+                    $("#SalesDetailModel_ProductModel").removeClass("border-danger");
+                    $(".chosen-single").css("border", "1px solid #cccccc");
+                    $("#SalesDetailModel_CampaignPrice").removeClass("border-danger");
+                    $("#SalesDetailModel_NetAmnt").removeClass("border-danger");
+
+                }
+                else {
+                    //
+                }
+            }
+        });
+
+        return false;
+
+       });
+
+        function RemoveProduct(el, id) {
+
+            if (id == 0 || id == undefined) {
+
+            }
+            $(el).parent().parent().remove();
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            var sum = 0;
+            $("#grid tbody tr #Qty").each(function () {
+
+                var value = $(this).text();
+                // add only if the value is number
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+            });
+            //$("#tdTotalQty").text(sum.toFixed(2));
+            $("#tdTotalQty").text(sum);
+
+            sum = 0;
+            $("#grid tbody tr #TotalAmnt").each(function () {
+
+                var value = $(this).text();
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+            });
+            $("#tdTotalPrice").text(sum);
+
+            sum = 0;
+            $("#grid tbody tr #DiscountAmnt").each(function () {
+
+                var value = $(this).text();
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+            });
+            $("#tdTotalDiscount").text(sum);
+
+            sum = 0;
+            $("#grid tbody tr #WithAdjAmnt").each(function () {
+
+                var value = $(this).text();
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+            });
+            $("#tdTotalWithAdjAmount").text(sum);
+
+            sum = 0;
+            $("#grid tbody tr #NetAmnt").each(function () {
+
+                var value = $(this).text();
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+            });
+            $("#NetSalesAmnt").val(sum);
+            $("#tdTotalNetAmount").text(sum);
+        }
+
+
+        //--------------------product detail END----------------------------//
+
+        //------------ Calculate total amount -------------------//
+
+        $("#SalesDetailModel_Qty").change(function () {
+            var qty = $(this).val();
+            var totalAmount = 0.0;
+            var netAmount = 0.0;
+            var disAmount = $("#SalesDetailModel_DiscountAmnt").val();
+            var camPrice = $("#SalesDetailModel_CampaignPrice").val();
+            var withAdjAmount = $("#SalesDetailModel_WithAdjAmnt").val();
+            if (camPrice != '') {
+                totalAmount = parseFloat(parseInt(qty) * parseFloat(camPrice));
+                netAmount = totalAmount;
+                if (disAmount != '') {
+                    netAmount = parseFloat(netAmount - parseFloat(disAmount));
+                }
+                if (withAdjAmount != '') {
+                    netAmount = parseFloat(netAmount - parseFloat(withAdjAmount));
+                }
+            }
+            $("#SalesDetailModel_TotalAmnt").val(totalAmount);
+            $("#SalesDetailModel_NetAmnt").val(netAmount);
+        });
+
+        $("#SalesDetailModel_DiscountAmnt").change(function () {
+            var disAmount = $(this).val();
+            var netAmount = 0.0;
+            var totalAmount = 0.0;
+            var qty = $("#SalesDetailModel_Qty").val();
+            var camPrice = $("#SalesDetailModel_CampaignPrice").val();
+            var withAdjAmount = $("#SalesDetailModel_WithAdjAmnt").val();
+            if (camPrice != '' && qty != '') {
+                totalAmount = parseFloat(parseInt(qty) * parseFloat(camPrice));
+                netAmount = totalAmount;
+                if (disAmount != '') {
+                    netAmount = parseFloat(netAmount - parseFloat(disAmount));
+                }
+                if (withAdjAmount != '') {
+                    netAmount = parseFloat(netAmount - parseFloat(withAdjAmount));
+                }
+            }
+            $("#SalesDetailModel_TotalAmnt").val(totalAmount);
+            $("#SalesDetailModel_NetAmnt").val(netAmount);
+        });
+
+        $("#SalesDetailModel_WithAdjAmnt").change(function () {
+            var withAdjAmount = $(this).val();
+            var totalAmount = 0.0;
+            var netAmount = 0.0;
+            var qty = $("#SalesDetailModel_Qty").val();
+            var camPrice = $("#SalesDetailModel_CampaignPrice").val();
+            var disAmount = $("#SalesDetailModel_DiscountAmnt").val();
+            if (camPrice != '' && qty != '') {
+                totalAmount = parseFloat(parseInt(qty) * parseFloat(camPrice));
+                netAmount = totalAmount;
+                if (withAdjAmount != '') {
+                    netAmount = parseFloat(netAmount - parseFloat(withAdjAmount));
+                }
+                if (disAmount != '') {
+                    netAmount = parseFloat(netAmount - parseFloat(disAmount));
+                }
+            }
+            $("#SalesDetailModel_TotalAmnt").val(totalAmount);
+            $("#SalesDetailModel_NetAmnt").val(netAmount);
+        });
+
+        //------------ Calculate total amount END -------------------//
+
+        //--------------- calculate payment fields ---------------------//
+
+        $("#PayAmnt").change(function () {
+            var payAmount = $(this).val();
+            var netAmount = $("#tdTotalNetAmount").text();
+            if (netAmount == '' || netAmount == null || payAmount == '' || payAmount == null) {
+                return false;
+            }
+            else {
+                $("#DueAmnt").val(parseFloat(netAmount) - parseFloat(payAmount));
+            }
+        });
+
+        function GetSellerInfo() {
+            var entityCode = $('#Issby').val();
+            var url = '@Url.Action("GetSellerInfo", "Sales")';
+            if (entityCode == null || entityCode == '') {
+                return false;
+            }
+            else {
+                var data = {
+                    issueBy: issueBy
+                };
+                $.ajax({
+                    url: url,
+                    data: data,
+                    type: 'POST',
+                    cache: false,
+                    success: function (obj) {
+                        if (obj.Result == true) {
+                            alert(obj.Result);
+                        }
+                        else if (obj.Result == false) {
+                            alert('System is unable to load data please try again.');
+                            $('#lblSellerInfo').text('');
+                        }
+                        else {
+                            $('#lblSellerInfo').text(obj.sellerInfo);
+                        }
+                    }
+                });
+            }
+        }
+
+        //--------------- calculate payment fields END ---------------------//
+
+    </script>
+}

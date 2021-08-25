@@ -1,0 +1,66 @@
+﻿@model BLL.DMS.ViewModel.EntityModel
+
+@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "Deposit Sales Info Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    iframe {
+        width: 100%;
+    }
+</style>
+<h2>  Date Wise Dealer Sales Report</h2>
+<div class="container">
+    <div class="row">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="">Dealer</label>
+                        @*@Html.DropDownListFor(model => model.NAME, new SelectList(Model.NAME), "-- Select Entity --", new { @class = "form-control" })*@
+                    <select class="form-control" name="EID">
+                        <option value="0">--Select--</option>
+                        <option value="302">302-DHAKA MARKET</option>
+                        <option value="373">373-BARISHAL MARKET</option>
+                        <option value="375">375-RAJS-MARKET</option>
+                        <option value="378">378-JESSORE MKT</option>
+                        <option value="372">372-CHAUMOHONI MKT</option>
+                        <option value="374">374-CTG MARKET</option>
+                        <option value="376">376-KHULNA MARKET</option>
+                        <option value="384">384-BOGURA MARKET</option>
+                        <option value="434">434-CUMILLA MARKET</option>
+                        <option value="442">442-SYLHET MARKET</option>
+                        <option value="461">461-FARIDPUR MARKET</option>
+                        <option value="516">516-RANGPUR MARKET</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="">From Date</label>
+                        <input type="date" class="form-control" id="date" name="fdate" placeholder="Enter Date" required>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="">To Date</label>
+                        <input type="date" class="form-control" id="tdate" name="tdate" placeholder="Enter Date" required> 
+                    </div>
+                </div> 
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group"> 
+                        <input type="submit" name="Show" class="btn btn-default">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        @if (ViewBag.ReportViewer != null)
+        {
+            @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+        }
+    </div>
+</div>
+

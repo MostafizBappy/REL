@@ -1,0 +1,33 @@
+﻿@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "Deposit Sales Info Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    iframe {
+        width:100%;
+    }
+</style>
+<h2>Deposit Sales Report</h2>
+<div class="container">
+    <div class="row">
+        <form method="post">
+            <div class="form-group">
+                <label for="">Date</label>
+                <input type="date" class="form-control" id="date" name="date" placeholder="Enter Date" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="Show" class="btn btn-default">
+            </div>
+
+        </form>
+    </div>
+    <div class="row">
+        @if (ViewBag.ReportViewer != null)
+        {
+            @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+        }
+
+    </div>
+</div>
+

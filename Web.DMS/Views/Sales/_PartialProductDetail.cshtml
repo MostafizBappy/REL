@@ -1,0 +1,68 @@
+﻿@model BLL.DMS.ViewModel.SalesDetailViewModel
+@using BLL.DMS.Helpers
+<tr class="dynamicRow">
+    @using (Html.BeginCollectionItem("SalesDetailList"))
+    {
+        if (@Model != null)
+        {
+            @*@Html.HiddenFor(model => model.ProductID)*@
+        }
+        <td style="text-align: left;">
+            @Html.HiddenFor(model => model.ProductID)
+            @Html.Encode(Model.ProductID)
+        </td>
+        <td style="text-align: left;">
+            @Html.HiddenFor(model => model.ProductModel)
+            @Html.Encode(Model.ProductModel)
+        </td>
+        <td style="text-align: right;">
+            @Html.HiddenFor(model => model.UnitPrice)
+            @Html.Encode(Model.UnitPrice)
+        </td>
+        <td style="text-align: right;">
+            @Html.HiddenFor(model => model.CampaignPrice)
+            @Html.Encode(Model.CampaignPrice)
+        </td>
+        <td style="text-align: right;" id="Qty">
+            @Html.HiddenFor(model => model.Qty)
+            @Html.Encode(Model.Qty)
+        </td>
+        <td style="text-align: right;" id="TotalAmnt">
+            @Html.HiddenFor(model => model.TotalAmnt)
+            @Html.Encode(Model.TotalAmnt)
+        </td>
+        <td style="text-align: right;" id="DiscountAmnt">
+            @Html.HiddenFor(model => model.DiscountAmnt)
+            @Html.Encode(Model.DiscountAmnt)
+        </td>
+        <td style="text-align: left;">
+            @Html.HiddenFor(model => model.DisCode)
+            @Html.Encode(Model.DisCode)
+        </td>
+        <td style="text-align: left;">
+            @Html.HiddenFor(model => model.DisRef)
+            @Html.Encode(Model.DisRef)
+        </td>
+        <td style="text-align: right;" id="WithAdjAmnt">
+            @Html.HiddenFor(model => model.WithAdjAmnt)
+            @Html.Encode(Model.WithAdjAmnt)
+        </td>
+        <td style="text-align: right;" id="NetAmnt">
+            @Html.HiddenFor(model => model.NetAmnt)
+            @Html.Encode(Model.NetAmnt)
+        </td>
+        <td style="text-align: left;">
+            @Html.HiddenFor(model => model.SLNO)
+            @Html.Encode(Model.SLNO)
+        </td>
+        <td style="text-align: left;">
+            @Html.HiddenFor(model => model.ProdRemarks)
+            @Html.Encode(Model.ProdRemarks)
+        </td>
+        <td style="text-align: center;">
+            <a href="#" class="" title="delete" onclick="RemoveProduct(this,@Model.ProductID)">
+                <img src='@Url.Content("~/Content/img/delete-icon.png")' alt="Delete" style="border: none;width:20px;height:20px " />
+            </a>
+        </td>
+    }
+</tr>

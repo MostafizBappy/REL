@@ -1,0 +1,51 @@
+﻿@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "Group Wise Opening Stock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    iframe {
+        width: 100%;
+    }
+</style>
+<h3 style="padding:10px 0px 0px 5px;">Group Wise Stock Report</h3>
+<div class="container">
+    <div class="row">
+        <form method="post">
+            <div class="row" style="margin-top:3rem">
+                <div class="col-md-6 form-group">
+                    <label for="">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" placeholder="Enter Date" required>
+                </div>
+                <div class="col-md-6 from-group">
+                    <label>Product Group</label>
+                    @Html.DropDownList("groupName", new SelectList(ViewBag.Groups, "GroupName", "GroupName"), new { @class = "form-control", @name = "groupName", @id = "searchable_ddl" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <input type="submit" name="Show" class="btn btn-default">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        @if (ViewBag.ReportViewer != null)
+        {
+            @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+        }
+
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#searchable_ddl").chosen();
+        });
+
+    </script>
+}
+
+
+

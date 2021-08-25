@@ -1,0 +1,86 @@
+﻿@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "Showroom Wise Distribution Plan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    iframe {
+        width: 100%;
+    }
+</style>
+<h3 style="padding:10px 0px 0px 5px;">Showroom Distribution Plan Report</h3>
+<div class="container">
+        <form method="post">
+
+            <div class="row" style="margin-top:3rem">
+                <div class="form-group col-md-6">
+                    <label for="">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" placeholder="Enter Date" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="from-group col-md-6">
+                    <label>Product Group</label>
+                    @Html.DropDownList("groupName", new SelectList(ViewBag.Groups, "GroupName", "GroupName"), new { @class = "form-control", @name = "groupName", @id = "searchable_ddl" })
+                </div>
+                <div class="from-group col-md-6">
+                    <label>Product Model</label>
+                    <select id="modelName" name="modelName" class="form-control"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <input type="submit" name="Show" class="btn btn-default">
+                </div>
+            </div>
+
+
+        </form>
+    <div class="row">
+        @if (ViewBag.ReportViewer != null)
+        {
+            @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+        }
+
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#searchable_ddl").chosen();
+        });
+
+        $(document).ready(function () {
+            loadModelList();
+        });
+
+        $("select#searchable_ddl").change(function () {
+            loadModelList();
+        });
+
+        function loadModelList() {
+            var groupName = $("#searchable_ddl").val();
+            var url = '@Url.Action("GetModelList", "DistributionReport")' + '?groupName=' + groupName;
+            $.get(url, function (response) {
+                var heads = $.parseJSON(response);
+
+                var ddl = $("#modelName");
+                // clear all previous options
+                $("#modelName>option").remove();
+
+                // populate the products
+                for (i = 0; i < heads.length; i++) {
+
+                    ddl.append($("<option />").val(heads[i].Value).text(heads[i].Text));
+                }
+            });
+        }
+
+    </script>
+}
+
+
+
+
+

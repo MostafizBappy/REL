@@ -1,0 +1,307 @@
+﻿@model DAL.DMS.Entity
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Entity</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SerialNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eNameBangla)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eNameBangla)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDescBangla)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDescBangla)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EntityType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntityType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentEntity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentEntity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Showroomtype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Showroomtype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommissionGet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommissionGet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesOrShowroom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalesOrShowroom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActiveDeactive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActiveDeactive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupSL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupSL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PCName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PCName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sFlag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sFlag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnableSalesSheet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnableSalesSheet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityMoney)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecurityMoney)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepositedUpTo0809)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepositedUpTo0809)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EntityCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntityCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoTr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoTr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DP_Inactive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DP_Inactive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPerson)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Desg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Desg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InDhk)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InDhk)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZoneID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZoneID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorporateSale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorporateSale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iTagStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iTagStock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesCenterType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalesCenterType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MapLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pEID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pEID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReqMailTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReqMailTo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.eName }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

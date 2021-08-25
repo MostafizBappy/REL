@@ -1,0 +1,291 @@
+﻿@model IEnumerable<BLL.DMS.ViewModel.EntityViewModel>
+@*@model IEnumerable<DAL.DMS.Entity>*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<h2>Entity List</h2>
+
+<style>
+    table {
+        display: block;
+        overflow-x: scroll;
+        white-space: nowrap;
+    }
+    a {
+        cursor:pointer;
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.eNameBangla)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EDescBangla)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntityType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentEntity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Showroomtype)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommissionGet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesOrShowroom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActiveDeactive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupSL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PCName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sFlag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnableSalesSheet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecurityMoney)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepositedUpTo0809)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntityCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoTr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DP_Inactive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactPerson)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Desg)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ContactNo)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.InDhk)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ZoneID)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAdd)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.CorporateSale)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.iTagStock)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SalesCenterType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MapLink)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.pEID)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ReqMailTo)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.eNameBangla)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EDescBangla)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntityType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentEntity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Showroomtype)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommissionGet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalesOrShowroom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActiveDeactive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupSL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PCName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sFlag)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnableSalesSheet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SecurityMoney)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepositedUpTo0809)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntityCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoTr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DP_Inactive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactPerson)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Desg)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNo)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.InDhk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ZoneID)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAdd)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CorporateSale)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iTagStock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalesCenterType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MapLink)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pEID)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReqMailTo)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EID }) |
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.EID })*@
+                    <a id="deleteItem" class="deleteItem" data-target="#basic"
+                       data-toggle="modal"
+                       data-path="@Url.Action("Delete", "Entities", new { id = @item.EID })">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                Are you Sure!!! You want to delete this item?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn blue" id="btnContinueDelete">Continue</button>
+                <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var path_to_delete;
+
+    $(".deleteItem").click(function (e) {
+        path_to_delete = $(this).data('path');
+    });
+
+    $('#btnContinueDelete').click(function () {
+        window.location = path_to_delete;
+    });
+</script>
+

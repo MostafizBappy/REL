@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8B453448-CD4A-42FC-B3A2-7EED55188A6D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL.DMS</RootNamespace>
+    <AssemblyName>DAL.DMS</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Customer.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DMSDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DMSDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DMSDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DMSDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DMSDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityType.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LCDetail.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LCMaster.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MRSRDetail.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MRSRMaster.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductCategory.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product_Histoy.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceiveProductSerial.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RequirmentDetail.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SoftUser.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSearch_SalesInfo_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_DailyProductSalesQuantity_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_DEALER_ACCOUNT_INFO_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_EntityDateWiseStock_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetDealerSalesInfo_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetMonthlyTotalByZone_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetZoneSalesInfo_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GET_MODEL_WISE_DATA_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GET_MQ_CS_REPORT_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GET_MQ_REPORT_DATA_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GET_TABLE_OF_CON_ASC_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GET_TABLE_OF_CON_DESC_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GroupWiseDistributionPlan_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GroupWiseOpeningStock_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_HC_Pending_ChallanWise_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_HC_Product_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_HC_Product_Stock_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_LC_Product_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_LC_Product_Stock_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_LC_Wise_DUE_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_RPT_GET_DEPOSIT_INFO_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_RPT_GET_SALES_INFO_CENTER_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_RPT_GET_SALES_INFO_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_DATE_AMOUNT_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_PERFORMANCE_CENTER_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_PERFORMANCE_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_APR_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_AUG_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_DEC_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_FEB_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_JAN_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_JULY_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_JUN_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_MAR_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_MAY_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_NOV_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_OCT_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SALES_QTY_SEP_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_Total_Sales_Irregular_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_Total_Sales_Regular_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_Total_Sales_Result.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierProduct.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbCampaignMaster.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbCarrierInfo.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbCarryingCharge.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbCustomerVoucher.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbDistThana.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMainMenu.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblSubMenu.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbMenu.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSM.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSMSRead.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSMSReceipentList.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSMSReceipentReport.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbStoreInfo.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbTagPromocode.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbTarget.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbTargetYearly.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbTC.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbTC_Customer.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbTermsCondition.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbVATMaster.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbVehicleInfo.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbVendorInfo.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrType.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserLoginTrack.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserScreenList.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_CampaignInfo.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_Sales_BILL.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_Search_Sales.cs">
+      <DependentUpon>DMSDataModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="DMSDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DMSDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DMSDataModel.edmx.diagram">
+      <DependentUpon>DMSDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DMSDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DMSDataModel.edmx</DependentUpon>
+      <LastGenOutput>DMSDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DMSDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DMSDataModel.edmx</DependentUpon>
+      <LastGenOutput>DMSDataModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

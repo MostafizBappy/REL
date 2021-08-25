@@ -1,0 +1,10 @@
+﻿@model BLL.DMS.ViewModel.SalesViewModel
+
+@if (Model != null && Model.SalesDetailList != null)
+{
+    for (var x = 0; x < Model.SalesDetailList.Count(); x++)
+    {
+        @Html.Partial("_PartialProductDetail", Model.SalesDetailList[x]);
+    }
+
+}

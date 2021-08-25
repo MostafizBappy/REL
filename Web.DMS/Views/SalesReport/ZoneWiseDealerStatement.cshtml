@@ -1,0 +1,89 @@
+﻿@model BLL.DMS.ViewModel.EntityModel
+
+@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "Zone Wise Dealer Statement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    iframe {
+        width: 100%;
+    }
+</style>
+<h2>Zone Wise Dealer Statement</h2>
+<div class="container">
+    <div class="row">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="">Zone</label>
+                        @*@Html.DropDownListFor(model => model.NAME, new SelectList(Model.NAME), "-- Select Entity --", new { @class = "form-control" })*@
+                    <select class="form-control" name="zone">
+                        <option value="0">--Select--</option>
+                        <option value="Chaumohani CTP(Cash Point)">Chaumohani CTP(Cash Point)</option>
+                        <option value="Magura CTP (Cash Point)">Magura CTP (Cash Point)</option>
+                        <option value="RAJSHAHI MARKET">RAJSHAHI MARKET</option>
+                        <option value="Narail  CTP (Cash Point)">Narail  CTP (Cash Point)</option>
+                        <option value="Khulna CTP (Cash Point)">Khulna CTP (Cash Point)</option>
+                        <option value="SYLHET MARKET">SYLHET MARKET</option>
+                        <option value="Comilla CTP (Cash Point)">Comilla CTP (Cash Point)</option>
+                        <option value="FARIDPUR MARKET">FARIDPUR MARKET</option>
+                        <option value="BOGURA MARKET">BOGURA MARKET</option>
+                        <option value="DHAKA MARKET">DHAKA MARKET</option>
+                        <option value="Bogra-02 CTP (Cash Point)">Bogra-02 CTP (Cash Point)</option>
+                        <option value="Bandarban CTP (Cash Point)">Bandarban CTP (Cash Point)</option>
+                        <option value="Dholaipar CTP (Cash Point)">Dholaipar CTP (Cash Point)</option>
+                        <option value="CHAUMUHANI MARKET">CHAUMUHANI MARKET</option>
+                        <option value="Natore  CTP (Cash Point)">Natore  CTP (Cash Point)</option>
+                        <option value="Lacsham CTP (Cash Point)">Lacsham CTP (Cash Point)</option>
+                        <option value="Ramgonj CTP (Cash Point)">Ramgonj CTP (Cash Point)</option>
+                        <option value="Chandpur CTP (Cash Point)">Chandpur CTP (Cash Point)</option>
+                        <option value="CHITTOGRAM MARKET">CHITTOGRAM MARKET</option>
+                        <option value="Ishwardi CTP (Cash Point)">Ishwardi CTP (Cash Point)</option>
+                        <option value="JESSORE MARKET">JESSORE MARKET</option>
+                        <option value="Dinajpur CTP (Cash Point)">Dinajpur CTP (Cash Point)</option>
+                        <option value="Chapai Nawabgonj CTP (Cash Po)">Chapai Nawabgonj CTP (Cash Po)</option>
+                        <option value="Kushtia CTP (Cash Point)">Kushtia CTP (Cash Point)</option>
+                        <option value="Maijdee CTP (Cash Point)">Maijdee CTP (Cash Point)</option>
+                        <option value="Narayangonj CTP (Cash Point)">Narayangonj CTP (Cash Point)</option>
+                        <option value="COMILLA MARKET">COMILLA MARKET</option>
+                        <option value="Dhaka Area Institute">Dhaka Area Institute</option>
+                        <option value="BARISHAL MARKET">BARISHAL MARKET</option>
+                        <option value="Barisal CTP (Cash Point)">Barisal CTP (Cash Point)</option>
+                        <option value="RANGPUR MARKET">RANGPUR MARKET</option>
+                        <option value="Jessore - 02 CTP (Cash Point)">Jessore - 02 CTP (Cash Point)</option>
+                        <option value="KHULNA MARKET">KHULNA MARKET</option>
+                        <option value="Institutional Sales - Dhaka">Institutional Sales - Dhaka</option>
+                        <option value="Coxs Bazar CTP (Cash Point)">Coxs Bazar CTP (Cash Point)</option> 
+                    </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="">From Date</label>
+                        <input type="date" class="form-control" id="date" name="fdate" placeholder="Enter Date" required>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="">To Date</label>
+                        <input type="date" class="form-control" id="tdate" name="tdate" placeholder="Enter Date" required> 
+                    </div>
+                </div> 
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group"> 
+                        <input type="submit" name="Show" class="btn btn-default">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        @if (ViewBag.ReportViewer != null)
+        {
+            @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+        }
+    </div>
+</div>
+
